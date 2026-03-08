@@ -36,7 +36,7 @@ const FirebaseNotifications = {
         try {
             swReg = await navigator.serviceWorker.register('./firebase-messaging-sw.js');
             await navigator.serviceWorker.ready;  // wait until it's active
-            console.log('✅ Service worker registered');
+            console.log('Complete today's study topics in EG.');
         } catch (err) {
             console.error('❌ Service worker registration failed:', err);
             throw err;
@@ -111,3 +111,4 @@ const FirebaseNotifications = {
 
 // Start listening for foreground messages
 FirebaseNotifications.listenForeground();
+
