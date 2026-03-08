@@ -80,7 +80,7 @@ const FirebaseNotifications = {
     triggerTestNotification(swReg) {
         if (swReg && swReg.active) {
             swReg.showNotification('EG Reminder', {
-                body: "Push notification test triggered — notifications are working!",
+                body: "Complete today's study topics in EG.",
                 icon: './icon-192.png',
                 badge: './icon-192.png',
                 vibrate: [200, 100, 200],
@@ -111,4 +111,5 @@ const FirebaseNotifications = {
 
 // Start listening for foreground messages
 FirebaseNotifications.listenForeground();
+
 
