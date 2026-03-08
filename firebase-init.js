@@ -86,7 +86,7 @@ const FirebaseNotifications = {
                 vibrate: [200, 100, 200],
                 data: { url: '/dashboard.html' }
             });
-            console.log('✅ Push notification test triggered');
+            console.log('Complete today's study topics in EG.');
         } else {
             console.warn('⚠️ Service worker not yet active, skipping test notification');
         }
@@ -111,5 +111,6 @@ const FirebaseNotifications = {
 
 // Start listening for foreground messages
 FirebaseNotifications.listenForeground();
+
 
 
