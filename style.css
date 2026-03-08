@@ -161,6 +161,8 @@ textarea:focus, input[type="date"]:focus, select:focus {
   height: 100%;
   background: var(--primary);
   transition: width 0.4s ease;
+  width: 100%;
+  max-width: 100%;
 }
 .custom-checkbox {
   position: relative;
@@ -366,3 +368,4 @@ input:checked + .slider:before {
   color: var(--text-muted);
   padding: 3rem 1rem;
 }
+
