@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>EG Dashboard</title>
+    <meta name="description"
+        content="Your daily engineering study schedule – track progress and stay on top of every topic.">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <meta name="theme-color" content="#8b5cf6">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Today's Plan</h1>
+            <button id="bell-icon" aria-label="Notifications">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                </svg>
+            </button>
+        </header>
+
+        <main>
+            <div id="tasks-container">
+                <!-- Today's tasks are rendered dynamically here -->
+            </div>
+
+            <div class="progress-section">
+                <h3>Daily Progress</h3>
+                <div class="progress-ring">
+                    <svg height="160" width="160">
+                        <defs>
+                            <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#22d3ee" />
+                                <stop offset="100%" stop-color="#8b5cf6" />
+                            </linearGradient>
+                        </defs>
+                        <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.05)" stroke-width="12"
+                            fill="transparent" r="64" cx="80" cy="80" />
+                        <circle class="progress-ring__circle" stroke="url(#gradient)" stroke-width="12"
+                            fill="transparent" r="64" cx="80" cy="80" />
+                    </svg>
+                    <div class="progress-text" id="daily-progress-text">
+                        <span class="num">0 / 0</span>
+                        <span class="label">Completed</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-secondary" style="margin-top:2rem;" onclick="window.location.href='index.html'">Edit
+                Syllabus</button>
+        </main>
+
+        <!-- Notification Settings Modal -->
+        <dialog id="settings-modal" class="glass">
+            <div class="modal-header">
+                <h3>Notification Settings</h3>
+            </div>
+
+            <div class="input-group">
+                <label>Enable Reminders</label>
+                <label class="switch">
+                    <input type="checkbox" id="notify-enable">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="input-group">
+                <label>Reminder Time</label>
+                <select id="notify-time">
+                    <option value="19:00">7:00 PM</option>
+                    <option value="21:00">9:00 PM</option>
+                    <option value="22:30">10:30 PM</option>
+                </select>
+            </div>
+
+            <button id="save-settings" class="btn">Save Settings</button>
+            <button id="close-settings" class="btn-secondary" style="margin-top: 1rem;">Cancel</button>
+        </dialog>
+    </div>
+
+    <!-- Firebase Initialization (modular SDK – loads first, once) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCRM0Sa95-Knf3lKDxlsC3G9CeFjH9A1bs",
+            authDomain: "eg-study-scheduler.firebaseapp.com",
+            projectId: "eg-study-scheduler",
+            storageBucket: "eg-study-scheduler.firebasestorage.app",
+            messagingSenderId: "558635584282",
+            appId: "1:558635584282:web:b515a2dd11df8ec229faa3"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        // Expose to non-module scripts
+        window.__firebaseApp = app;
+        window.__firebaseReady = true;
+        window.dispatchEvent(new Event('firebase-ready'));
+    </script>
+
+    <!-- Firebase Messaging (compat build for non-module scripts) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js"></script>
+
+    <!-- App scripts -->
+    <script src="./storage.js"></script>
+    <script src="./scheduler.js"></script>
+    <script src="./firebase-init.js"></script>
+    <script src="./notifications.js"></script>
+    <script src="./dashboard.js"></script>
+</body>
+
+</html>

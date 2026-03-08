@@ -1,0 +1,368 @@
+:root {
+  --bg-dark: #0f172a;
+  --bg-darker: #020617;
+  --glass-bg: rgba(30, 41, 59, 0.6);
+  --glass-border: rgba(148, 163, 184, 0.1);
+  --glass-glow: rgba(139, 92, 246, 0.15);
+  --primary: #8b5cf6;
+  --primary-hover: #7c3aed;
+  --accent: #22d3ee;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --success: #10b981;
+  --danger: #ef4444;
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+body {
+  background: var(--bg-darker);
+  background-image: radial-gradient(circle at 15% 50%, rgba(139, 92, 246, 0.15), transparent 25%), radial-gradient(circle at 85% 30%, rgba(34, 211, 238, 0.15), transparent 25%);
+  color: var(--text-main);
+  min-height: 100vh;
+  padding-bottom: 2rem;
+  overflow-x: hidden;
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 var(--glass-glow);
+  border-radius: 20px;
+}
+h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--primary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: var(--text-main);
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem 0;
+}
+.input-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+.input-group label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+textarea, input[type="date"], select {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  border-radius: 12px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+textarea:focus, input[type="date"]:focus, select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.segmented-control {
+  display: flex;
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+.segmented-control input[type="radio"] {
+  display: none;
+}
+.segmented-control label {
+  flex: 1;
+  text-align: center;
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: 0.3s;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin: 0;
+}
+.segmented-control input[type="radio"]:checked + label {
+  background: var(--primary);
+  color: white;
+}
+.subject-card {
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 0.5s ease backwards;
+}
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s, opacity 0.3s;
+}
+.task-card.completed {
+  opacity: 0.6;
+}
+.task-card.completed p {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+.task-info {
+  flex: 1;
+  padding-right: 1rem;
+}
+.task-info h4 {
+  font-size: 0.875rem;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.task-info p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.subject-progress-bar {
+  height: 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.subject-progress-bar .fill {
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.4s ease;
+}
+.custom-checkbox {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+.custom-checkbox input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.checkmark {
+  position: absolute;
+  top: 0; left: 0;
+  height: 32px; width: 32px;
+  background-color: rgba(15, 23, 42, 0.8);
+  border: 2px solid var(--text-muted);
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+.custom-checkbox:hover input ~ .checkmark {
+  border-color: var(--primary);
+}
+.custom-checkbox input:checked ~ .checkmark {
+  background-color: var(--success);
+  border-color: var(--success);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 10px;
+  top: 6px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+.custom-checkbox input:checked ~ .checkmark:after {
+  display: block;
+}
+.btn {
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-top: 1rem;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(139, 92, 246, 0.3);
+}
+.btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: var(--text-main);
+  border: 1px solid var(--glass-border);
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.15);
+}
+#bell-icon, #settings-icon {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: 0.3s;
+  color: white;
+}
+#bell-icon:hover {
+  background: rgba(255,255,255,0.1);
+  transform: scale(1.05);
+}
+.progress-section {
+  text-align: center;
+  margin: 3rem 0;
+}
+.progress-ring {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 0 auto;
+}
+.progress-ring svg {
+  transform: rotate(-90deg);
+  width: 100%;
+  height: 100%;
+}
+.progress-ring__circle-bg {
+  stroke: rgba(255,255,255,0.05);
+  stroke-width: 12;
+  fill: transparent;
+}
+.progress-ring__circle {
+  stroke: url(#gradient);
+  stroke-width: 12;
+  fill: transparent;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.progress-text .num {
+  font-size: 2rem;
+  font-weight: 800;
+}
+.progress-text .label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+dialog {
+  margin: auto;
+  border: none;
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  color: var(--text-main);
+  padding: 2rem;
+  width: 90%;
+  max-width: 400px;
+}
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+}
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255,255,255,0.1);
+  transition: .4s;
+  border-radius: 34px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+input:checked + .slider {
+  background-color: var(--primary);
+}
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.empty-state {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 3rem 1rem;
+}
